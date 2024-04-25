@@ -76,3 +76,9 @@ wub@wub:~$ ros2 run demo_nodes_py listener
 [INFO] [1714036275.670648235] [listener]: I heard: [Hello World: 241]
 
 ```
+
+# 安装 colcon
+
+```shell
+sudo apt install python3-colcon-common-extensions
+```
