@@ -181,7 +181,7 @@ install(TARGETS
 
 ## 面相过程的方式生命一个节点
 
-- 要继承rclcpp::Node的节点（`auto node = std::make_shared<rclcpp::Node>("ros_1"`)），然后打印一条消息
+- 要继承rclcpp::Node的节点（`auto node = std::make_shared<rclcpp::Node>("ros_1")`），然后打印一条消息
 
 ```cpp
     // 1. 导入库文件
