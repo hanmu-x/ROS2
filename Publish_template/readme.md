@@ -5,7 +5,7 @@
 
 编译方法,把src复制到linux下项目目录下,执行`colcon build`或者` colcon build --packages-select publish_pkg`
 
-然后运行:`ros2 run publish_pkg publishNode`
+然后运行:`source install/setup.bash`然后`ros2 run publish_pkg publishNode`
 
 检验
 ```bash
