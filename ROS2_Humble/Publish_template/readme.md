@@ -1,6 +1,9 @@
 
 这是一个ros2发布者的模板
 
+ros2 pkg create publish_pkg --build-type ament_cmake --node-name publishNode --dependencies std_msgs rclcpp
+
+
 模板中包名为`publish_pkg`,节点名为`publishNode`,发布的话提名为`temp_topic`
 
 编译方法,把src复制到linux下项目目录下,执行`colcon build`或者` colcon build --packages-select publish_pkg`

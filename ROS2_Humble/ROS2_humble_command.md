@@ -11,9 +11,9 @@ ros2 run <package_name> <executable_name>  ## 包名  节点名
 
 2. `ros2 node list` 命令将显示所有正在运行的节点的名称。
 3. `ros2 node info <node_name>` 访问有关它们的更多信息 
-```bash
-ros2 node info /my_turtle  #节点``my_turtle``
-```
+    ```bash
+    ros2 node info /my_turtle  #节点``my_turtle``
+    ```
 4. 使用``rqt_graph``来可视化节点和话题的变化，以及它们之间的连接。
 5. ``ros2 topic list``命令将返回系统中当前活动的所有话题
 6. `ros2 topic list -t` 将返回相同的话题列表，这次在括号中附加了话题类型：
