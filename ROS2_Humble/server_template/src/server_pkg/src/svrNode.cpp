@@ -9,11 +9,14 @@ class SvNode : public rclcpp::Node
 public:
     SvNode(const rclcpp::NodeOptions &options) : Node("svrNode", options)
     {
+        // 创建名为 "svrNode" 的节点，并且创建一个服务并将其绑定到名为 "add_two_ints" 的话题上
+        // 服务的回调函数为 handle_request
         service_ = this->create_service<AddTwoInts>("add_two_ints", 
             std::bind(&SvNode::handle_request, this, std::placeholders::_1, std::placeholders::_2));
     }
 
 private:
+    // 回调函数:两个参数：请求（request）和响应（response）
     void handle_request(const std::shared_ptr<AddTwoInts::Request> request,
                         const std::shared_ptr<AddTwoInts::Response> response)
     {
@@ -29,8 +32,11 @@ private:
 int main(int argc, char **argv)
 {
     rclcpp::init(argc, argv);
+    // 创建 SvNode 的实例
     auto node = std::make_shared<SvNode>(rclcpp::NodeOptions());
+    // 进入 ROS2 的事件循环
     rclcpp::spin(node);
+    // 在程序退出之前，调用 rclcpp::shutdown() 关闭 ROS2 节点
     rclcpp::shutdown();
     return 0;
 }
