@@ -4,7 +4,7 @@
 // 实现成员函数
 void publisher::publish_message()
 {
-    auto message = publish_pkg::msg::MyCustomMsg();
+    auto message = publish_msg::msg::MyCustomMsg();
     message.my_integer = 42;
     message.my_string = "Hello, World!";
     RCLCPP_INFO(this->get_logger(), "Publishing: %d, '%s'", message.my_integer, message.my_string.c_str());
