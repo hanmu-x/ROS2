@@ -58,9 +58,13 @@ source ~/.bashrc
 ```
 也就是在~/.bashrc文件后面添加`source /opt/ros/humble/setup.bash`
 
+# 安装 colcon
 
-# 检验
+```shell
+sudo apt install python3-colcon-common-extensions
+```
 
+# 验证
 
 ```shell
 wub@wub:~$ ros2 run demo_nodes_cpp talker
@@ -75,10 +79,4 @@ wub@wub:~$ ros2 run demo_nodes_py listener
 [INFO] [1714036274.671316847] [listener]: I heard: [Hello World: 240]
 [INFO] [1714036275.670648235] [listener]: I heard: [Hello World: 241]
 
-```
-
-# 安装 colcon
-
-```shell
-sudo apt install python3-colcon-common-extensions
 ```
