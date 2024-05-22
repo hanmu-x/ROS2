@@ -37,3 +37,7 @@ ros2的服务模板
 
 ros2的客户端模板
 
+
+# param_template
+
+ros2中使用参数的模板
