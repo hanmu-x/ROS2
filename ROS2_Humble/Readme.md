@@ -8,7 +8,7 @@
 
 
 
-# Publish_template
+# publish_template
 
 ros2的发布者模板
 
@@ -17,7 +17,7 @@ ros2的发布者模板
 ros2自定义发布数据类型
 
 
-# Subscriber_template
+# subscriber_template
 
 ros2的订阅者模板
 
