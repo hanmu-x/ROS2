@@ -22,4 +22,3 @@ public:
     subscriber(std::string name);
     ~subscriber();
 };
-

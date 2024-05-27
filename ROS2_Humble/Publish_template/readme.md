@@ -1,6 +1,10 @@
 
 这是一个ros2发布者的模板
 
+改模板是一个简单的发布者模板,运行会发布话提名:temp_topic 内容为abcdefg的数据
+
+# 创建指令
+
 ros2 pkg create publish_pkg --build-type ament_cmake --node-name publishNode --dependencies std_msgs rclcpp
 
 

@@ -1,6 +1,8 @@
 
 这是一个ros2订阅者的模板
 
+这是一个简单的订阅者模板,订阅节点名称为temp_topic,订阅的数据类型为std_msgs::msg::String
+
 ```bash
 cd ~/ros2_ws/src
 ros2 pkg create publish_pkg --build-type ament_cmake --dependencies rclcpp std_msgs

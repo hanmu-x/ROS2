@@ -11,8 +11,8 @@ public:
     {
         // 创建名为 "svrNode" 的节点，并且创建一个服务并将其绑定到名为 "add_two_ints" 的话题上
         // 服务的回调函数为 handle_request
-        service_ = this->create_service<AddTwoInts>("add_two_ints", 
-            std::bind(&SvNode::handle_request, this, std::placeholders::_1, std::placeholders::_2));
+        service_ = this->create_service<AddTwoInts>("add_two_ints",
+                                                    std::bind(&SvNode::handle_request, this, std::placeholders::_1, std::placeholders::_2));
     }
 
 private:
@@ -21,13 +21,12 @@ private:
                         const std::shared_ptr<AddTwoInts::Response> response)
     {
         response->sum = request->a + request->b;
-        RCLCPP_INFO(this->get_logger(), "Incoming request: a=%ld, b=%ld. Sum: %ld", 
+        RCLCPP_INFO(this->get_logger(), "Incoming request: a=%ld, b=%ld. Sum: %ld",
                     request->a, request->b, (long int)response->sum);
     }
 
     rclcpp::Service<AddTwoInts>::SharedPtr service_;
 };
-
 
 int main(int argc, char **argv)
 {

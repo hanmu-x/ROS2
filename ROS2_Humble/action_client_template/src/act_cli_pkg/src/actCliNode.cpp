@@ -14,78 +14,84 @@
 
 namespace action_tutorials_cpp
 {
-class FibonacciActionClient : public rclcpp::Node
-{
-public:
-  using Fibonacci = action_pkg::action::Fibonacci;
-  using GoalHandleFibonacci = rclcpp_action::ClientGoalHandle<Fibonacci>;
-
-  explicit FibonacciActionClient(const rclcpp::NodeOptions & options)
-  : Node("fibonacci_action_client", options)
+  class FibonacciActionClient : public rclcpp::Node
   {
-    this->client_ptr_ = rclcpp_action::create_client<Fibonacci>(
-      this,
-      "fibonacci");
+  public:
+    using Fibonacci = action_pkg::action::Fibonacci;
+    using GoalHandleFibonacci = rclcpp_action::ClientGoalHandle<Fibonacci>;
 
-    this->timer_ = this->create_wall_timer(
-      std::chrono::milliseconds(500),
-      std::bind(&FibonacciActionClient::send_goal, this));
-  }
+    explicit FibonacciActionClient(const rclcpp::NodeOptions &options)
+        : Node("fibonacci_action_client", options)
+    {
+      this->client_ptr_ = rclcpp_action::create_client<Fibonacci>(
+          this,
+          "fibonacci");
 
-  void send_goal()
-  {
-    using namespace std::placeholders;
-
-    this->timer_->cancel();
-
-    if (!this->client_ptr_->wait_for_action_server()) {
-      RCLCPP_ERROR(this->get_logger(), "Action server not available after waiting");
-      rclcpp::shutdown();
+      this->timer_ = this->create_wall_timer(
+          std::chrono::milliseconds(500),
+          std::bind(&FibonacciActionClient::send_goal, this));
     }
 
-    auto goal_msg = Fibonacci::Goal();
-    goal_msg.order = 10;
+    void send_goal()
+    {
+      using namespace std::placeholders;
 
-    RCLCPP_INFO(this->get_logger(), "Sending goal");
+      this->timer_->cancel();
 
-    auto send_goal_options = rclcpp_action::Client<Fibonacci>::SendGoalOptions();
-    send_goal_options.goal_response_callback =
-      std::bind(&FibonacciActionClient::goal_response_callback, this, _1);
-    send_goal_options.feedback_callback =
-      std::bind(&FibonacciActionClient::feedback_callback, this, _1, _2);
-    send_goal_options.result_callback =
-      std::bind(&FibonacciActionClient::result_callback, this, _1);
-    this->client_ptr_->async_send_goal(goal_msg, send_goal_options);
-  }
+      if (!this->client_ptr_->wait_for_action_server())
+      {
+        RCLCPP_ERROR(this->get_logger(), "Action server not available after waiting");
+        rclcpp::shutdown();
+      }
 
-private:
-  rclcpp_action::Client<Fibonacci>::SharedPtr client_ptr_;
-  rclcpp::TimerBase::SharedPtr timer_;
+      auto goal_msg = Fibonacci::Goal();
+      goal_msg.order = 10;
 
-  void goal_response_callback(const GoalHandleFibonacci::SharedPtr & goal_handle)
-  {
-    if (!goal_handle) {
-      RCLCPP_ERROR(this->get_logger(), "Goal was rejected by server");
-    } else {
-      RCLCPP_INFO(this->get_logger(), "Goal accepted by server, waiting for result");
+      RCLCPP_INFO(this->get_logger(), "Sending goal");
+
+      auto send_goal_options = rclcpp_action::Client<Fibonacci>::SendGoalOptions();
+      send_goal_options.goal_response_callback =
+          std::bind(&FibonacciActionClient::goal_response_callback, this, _1);
+      send_goal_options.feedback_callback =
+          std::bind(&FibonacciActionClient::feedback_callback, this, _1, _2);
+      send_goal_options.result_callback =
+          std::bind(&FibonacciActionClient::result_callback, this, _1);
+      this->client_ptr_->async_send_goal(goal_msg, send_goal_options);
     }
-  }
 
-  void feedback_callback(
-    GoalHandleFibonacci::SharedPtr,
-    const std::shared_ptr<const Fibonacci::Feedback> feedback)
-  {
-    std::stringstream ss;
-    ss << "Next number in sequence received: ";
-    for (auto number : feedback->partial_sequence) {
-      ss << number << " ";
+  private:
+    rclcpp_action::Client<Fibonacci>::SharedPtr client_ptr_;
+    rclcpp::TimerBase::SharedPtr timer_;
+
+    void goal_response_callback(const GoalHandleFibonacci::SharedPtr &goal_handle)
+    {
+      if (!goal_handle)
+      {
+        RCLCPP_ERROR(this->get_logger(), "Goal was rejected by server");
+      }
+      else
+      {
+        RCLCPP_INFO(this->get_logger(), "Goal accepted by server, waiting for result");
+      }
     }
-    RCLCPP_INFO(this->get_logger(), ss.str().c_str());
-  }
 
-  void result_callback(const GoalHandleFibonacci::WrappedResult & result)
-  {
-    switch (result.code) {
+    void feedback_callback(
+        GoalHandleFibonacci::SharedPtr,
+        const std::shared_ptr<const Fibonacci::Feedback> feedback)
+    {
+      std::stringstream ss;
+      ss << "Next number in sequence received: ";
+      for (auto number : feedback->partial_sequence)
+      {
+        ss << number << " ";
+      }
+      RCLCPP_INFO(this->get_logger(), ss.str().c_str());
+    }
+
+    void result_callback(const GoalHandleFibonacci::WrappedResult &result)
+    {
+      switch (result.code)
+      {
       case rclcpp_action::ResultCode::SUCCEEDED:
         break;
       case rclcpp_action::ResultCode::ABORTED:
@@ -97,19 +103,19 @@ private:
       default:
         RCLCPP_ERROR(this->get_logger(), "Unknown result code");
         return;
+      }
+      std::stringstream ss;
+      ss << "Result received: ";
+      for (auto number : result.result->sequence)
+      {
+        ss << number << " ";
+      }
+      RCLCPP_INFO(this->get_logger(), ss.str().c_str());
+      rclcpp::shutdown();
     }
-    std::stringstream ss;
-    ss << "Result received: ";
-    for (auto number : result.result->sequence) {
-      ss << number << " ";
-    }
-    RCLCPP_INFO(this->get_logger(), ss.str().c_str());
-    rclcpp::shutdown();
-  }
-};  // class FibonacciActionClient
+  }; // class FibonacciActionClient
 
-}  // namespace action_tutorials_cpp
-
+} // namespace action_tutorials_cpp
 
 RCLCPP_COMPONENTS_REGISTER_NODE(action_tutorials_cpp::FibonacciActionClient)
 
@@ -117,7 +123,7 @@ int main(int argc, char **argv)
 {
   rclcpp::init(argc, argv);
   // auto node = std::make_shared<action_tutorials_cpp::FibonacciActionClient>();
-  auto node_options = rclcpp::NodeOptions();  // 可以根据需要配置NodeOptions
+  auto node_options = rclcpp::NodeOptions(); // 可以根据需要配置NodeOptions
   auto node = std::make_shared<action_tutorials_cpp::FibonacciActionClient>(node_options);
   rclcpp::spin(node);
   rclcpp::shutdown();

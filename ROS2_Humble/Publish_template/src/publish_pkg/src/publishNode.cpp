@@ -8,6 +8,7 @@ int main(int argc, char ** argv)
   auto node = std::make_shared<publisher>("my_publishr");
   while(1)
   {
+    // 循环发布数据
     sleep(3);
     node->publish_data();
   }
