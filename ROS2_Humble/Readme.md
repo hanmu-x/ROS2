@@ -49,3 +49,7 @@ ros2中使用action服务端的模板
 # action_client_template
 
 ros2中使用action客户短的模板
+
+# launch_action
+
+使用launch启动文件启动 publish_template 中的发布者节点
