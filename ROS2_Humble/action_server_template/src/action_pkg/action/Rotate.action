@@ -1,0 +1,7 @@
+# Rotate.action
+
+int32 goal # 目标旋转角度
+---
+int32 result # 最终达到的角度或错误码
+---
+int32 feedback # 当前角度的反馈
