@@ -20,7 +20,7 @@ public:
         // 绑定处理目标、取消请求和接受目标的回调函数。
         action_server_ = rclcpp_action::create_server<Rotate>(
             this,
-            "rotate",
+            "rotate",  // 定义动作服务器名称，客户端将通过这个名称来找到并发送目标给这个服务器
             std::bind(&RotateActionServer::handle_goal, this, std::placeholders::_1, std::placeholders::_2),
             std::bind(&RotateActionServer::handle_cancel, this, std::placeholders::_1),
             std::bind(&RotateActionServer::handle_accepted, this, std::placeholders::_1));
@@ -33,6 +33,7 @@ private:
     rclcpp_action::GoalResponse handle_goal(const rclcpp_action::GoalUUID &, std::shared_ptr<const Rotate::Goal> goal)
     {
         RCLCPP_INFO(get_logger(), "Received goal request: %d degrees", goal->goal);
+        // 表示动作服务器接受这个目标请求
         return rclcpp_action::GoalResponse::ACCEPT_AND_EXECUTE;
     }
     // 处理取消动作请求。当接收到取消请求时，打印消息并返回接受取消的响应。

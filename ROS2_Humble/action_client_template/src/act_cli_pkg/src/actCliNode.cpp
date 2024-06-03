@@ -48,7 +48,7 @@ public:
   }
 
 private:
-  rclcpp_action::Client<Rotate>::SharedPtr client_ptr_;                                       // 处理action的客户端 的智能指针
+  rclcpp_action::Client<Rotate>::SharedPtr client_ptr_;  // 处理action的客户端 的智能指针
   std::shared_future<rclcpp_action::ClientGoalHandle<Rotate>::SharedPtr> goal_handle_future_; // 存储未来获取的action目标句柄
 
   // 当action目标被服务器接受或拒绝时被调用
