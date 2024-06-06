@@ -27,4 +27,6 @@ void publisher::publish_data()
   // 向对象中存储数据要调用该数据类型对象的data
   text_data.data = "abcdefg";
   pub_er->publish(text_data);
+  RCLCPP_INFO(this->get_logger(), "abcdefg");
+  
 }
