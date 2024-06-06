@@ -53,3 +53,7 @@ ros2中使用action客户短的模板
 # launch_action
 
 使用launch启动文件启动 publish_template 中的发布者节点
+
+# bags_recorder
+
+使用程序录制话题发布的数据
