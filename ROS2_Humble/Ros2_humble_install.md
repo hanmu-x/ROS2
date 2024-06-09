@@ -80,3 +80,23 @@ wub@wub:~$ ros2 run demo_nodes_py listener
 [INFO] [1714036275.670648235] [listener]: I heard: [Hello World: 241]
 
 ```
+
+
+# gazebo
+
+## 安装
+
+
+```bash
+sudo apt install ros-humble-gazebo-*
+```
+
+
+# rqt
+
+## 安装
+
+```bash
+sudo apt install ros-humble-rqt
+```
+
