@@ -47,16 +47,16 @@ sudo apt-get upgrade
 桌面安装（推荐）：ROS、RViz、演示、教程。
 
 ```shell
-sudo apt install ros-humble-desktop
+sudo apt install ros-foxy-desktop python3-argcomplete
 ```
 
 添加环境变量
 
 ```shell
-echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
+echo "source /opt/ros/foxy/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 ```
-也就是在~/.bashrc文件后面添加`source /opt/ros/humble/setup.bash`
+也就是在~/.bashrc文件后面添加`source /opt/ros/foxy/setup.bash`
 
 # 安装 colcon
 
@@ -88,7 +88,7 @@ wub@wub:~$ ros2 run demo_nodes_py listener
 
 
 ```bash
-sudo apt install ros-humble-gazebo-*
+sudo apt install ros-foxy-gazebo-*
 ```
 
 
@@ -97,17 +97,6 @@ sudo apt install ros-humble-gazebo-*
 ## 安装
 
 ```bash
-sudo apt install ros-humble-rqt
+sudo apt install ros-foxy-rqt
 ```
-
-# tf2
-
-```bash
-sudo apt install ros-humble-tf2-tools
-```
-
-
-
-
-
 
