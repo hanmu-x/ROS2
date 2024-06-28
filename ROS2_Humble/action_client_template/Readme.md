@@ -30,7 +30,7 @@ wub@wubr:~/code/ros2_humble/action_client_template$ ros2 run act_cli_pkg actCliN
 [INFO] [1719539625.426430604] [rotate_action_client]: Current rotation angle: 269 degrees
 [INFO] [1719539625.436567251] [rotate_action_client]: Current rotation angle: 270 degrees
 [INFO] [1719539625.446909976] [rotate_action_client]: client Goal succeeded with final angle: 270 degrees
-^C[INFO] [1719539628.138842399] [rclcpp]: signal_handler(signum=2)
+^C[INFO] [1719539628.138842399] [rclcpp]: signal_handler(signum=2) 
 
 
 
