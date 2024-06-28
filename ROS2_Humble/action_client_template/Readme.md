@@ -20,6 +20,17 @@ ros2 run act_cli_pkg actCliNode
 
 
 
+wub@wubr:~/code/ros2_humble/action_client_template$ ros2 run act_cli_pkg actCliNode 
+[INFO] [1719539623.646120815] [rotate_action_client]: Goal accepted by server, waiting for result
+[INFO] [1719539623.656792207] [rotate_action_client]: Current rotation angle: 2 degrees
+[INFO] [1719539623.666813195] [rotate_action_client]: Current rotation angle: 3 degrees
+[INFO] [1719539623.676714096] [rotate_action_client]: Current rotation angle: 4 degrees
+............................
+[INFO] [1719539625.416923155] [rotate_action_client]: Current rotation angle: 268 degrees
+[INFO] [1719539625.426430604] [rotate_action_client]: Current rotation angle: 269 degrees
+[INFO] [1719539625.436567251] [rotate_action_client]: Current rotation angle: 270 degrees
+[INFO] [1719539625.446909976] [rotate_action_client]: client Goal succeeded with final angle: 270 degrees
+^C[INFO] [1719539628.138842399] [rclcpp]: signal_handler(signum=2)
 
 
 
