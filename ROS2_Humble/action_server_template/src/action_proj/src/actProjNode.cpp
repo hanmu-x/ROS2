@@ -52,7 +52,8 @@ private:
     // 这是动作执行的核心逻辑。在新线程中运行，负责实际的旋转操作模拟
     void execute(const std::shared_ptr<GoalHandleRotate> goal_handle)
     {
-        auto goal = goal_handle->get_goal();
+        auto goal_v = goal_handle->get_goal();
+        RCLCPP_INFO(get_logger(), "Target angle: %d",goal_v->goal );
         auto feedback = std::make_shared<Rotate::Feedback>();
         auto &current_angle = feedback->feedback;
 
@@ -64,7 +65,7 @@ private:
 
         // 控制客户端旋转，每0.01秒发布一次当前角度
         rclcpp::Rate loop_rate(100);
-        while (rclcpp::ok() && current_angle <= 270)
+        while (rclcpp::ok() && current_angle < goal_v->goal)
         {
             if (goal_handle->is_canceling())
             {
@@ -88,7 +89,7 @@ private:
         }
 
         // 检查是否完成目标
-        if (current_angle > 270)
+        if (current_angle >= goal_v->goal)
         {
             auto result = std::make_shared<Rotate::Result>();
             result->result = current_angle;

@@ -89,6 +89,7 @@ wub@wub:~$ ros2 run demo_nodes_py listener
 
 ```bash
 sudo apt install ros-humble-gazebo-*
+ros2 launch gazebo_ros gazebo.launch.py
 ```
 
 

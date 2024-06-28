@@ -12,7 +12,8 @@ using GoalHandleRotate = rclcpp_action::ClientGoalHandle<Rotate>;
 class RotateActionClient : public rclcpp::Node
 {
 public:
-  explicit RotateActionClient(const rclcpp::NodeOptions &options) : Node("rotate_action_client", options)
+  // RotateActionClient(const rclcpp::NodeOptions &options) : Node("rotate_action_client", options)
+  RotateActionClient() : Node("rotate_action_client")
   {
     // 函数创建了一个动作客户端，指定了节点实例指针 this 和动作服务器的名称 "rotate"
     client_ptr_ = rclcpp_action::create_client<Rotate>(this, "rotate");
@@ -74,7 +75,6 @@ private:
     switch (result.code)
     {
     case rclcpp_action::ResultCode::SUCCEEDED:
-      printf("client Goal succeeded with final angle: %d degrees \n", result.result->result);
       RCLCPP_INFO(get_logger(), "client Goal succeeded with final angle: %d degrees", result.result->result);
       break;
     case rclcpp_action::ResultCode::ABORTED:
@@ -90,19 +90,30 @@ private:
   }
 };
 
+
+
+
 int main(int argc, char **argv)
 {
-  rclcpp::init(argc, argv);
+    rclcpp::init(argc, argv);
+    // 创建 RotateActionClient（） 的实例
+    // 创建节点选项，允许未声明的参数
+    // auto options = rclcpp::NodeOptions().allow_undeclared_parameters(true);
+    // auto action_client = std::make_shared<RotateActionClient>(options);
+    auto action_client = std::make_shared<RotateActionClient>();
 
-  auto options = rclcpp::NodeOptions().allow_undeclared_parameters(true);
-  auto client = std::make_shared<RotateActionClient>(options);
+    // // 创建一个多线程执行器，并将动作客户端添加到执行器中
+    rclcpp::executors::MultiThreadedExecutor executor;
+    executor.add_node(action_client);
+    // 发送角度
+    action_client->send_goal(270);
 
-  // 请求旋转270度
-  client->send_goal(270);
+    // 执行器开始执行，等待动作完成
+    executor.spin();
 
-  // 使用新的公共方法等待结果
-  client->wait_for_result();
-
-  rclcpp::shutdown();
-  return 0;
+    rclcpp::shutdown();
+    return 0;
 }
+
+
+
