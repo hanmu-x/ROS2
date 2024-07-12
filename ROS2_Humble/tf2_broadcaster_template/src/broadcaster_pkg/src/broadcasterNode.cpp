@@ -1,3 +1,4 @@
+
 #include <functional>
 #include <memory>
 #include <sstream>
@@ -12,15 +13,13 @@
 class FramePublisher : public rclcpp::Node
 {
 public:
-  FramePublisher()
-      : Node("turtle_tf2_frame_publisher")
+  FramePublisher() : Node("turtle_tf2_frame_publisher")
   {
     // declare_parameter 获取名为 turtlename 的节点参数，如果不存在则默认为 "turtle"
     turtlename_ = this->declare_parameter<std::string>("turtlename", "turtle1");
 
     // 用于发布TF变换
-    tf_broadcaster_ =
-        std::make_unique<tf2_ros::TransformBroadcaster>(*this);
+    tf_broadcaster_ = std::make_unique<tf2_ros::TransformBroadcaster>(*this);
 
     // 订阅turtle{1}{2}/pose主题并调用handle_turtle_pose
     // 每个消息的回调函数

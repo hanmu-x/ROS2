@@ -1,3 +1,11 @@
+/*
+ * @Author: yingjie_wang 2778809626@qq.com
+ * @Date: 2024-06-16 11:41:48
+ * @LastEditors: yingjie_wang 2778809626@qq.com
+ * @LastEditTime: 2024-07-12 15:11:35
+ * @FilePath: \tf2_static_broadcaster_template\src\broadcaster_static_pkg\src\broadcasterStaticNode.cpp
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 #include <memory>
 
 #include "geometry_msgs/msg/transform_stamped.hpp"
@@ -49,7 +57,8 @@ private:
     q.setRPY(
         atof(transformation[5]),
         atof(transformation[6]),
-        atof(transformation[7]));
+        atof(transformation[7])
+    );
 
     // 将四元数的各个分量分配给消息中的旋转部分
     t.transform.rotation.x = q.x();
