@@ -1,3 +1,11 @@
+/*
+ * @Author: yingjie_wang 2778809626@qq.com
+ * @Date: 2024-06-16 11:59:27
+ * @LastEditors: yingjie_wang 2778809626@qq.com
+ * @LastEditTime: 2024-07-22 14:51:52
+ * @FilePath: \tf2_listener_template\src\listener_pkg\src\listenerNode.cpp
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 #include "rclcpp/rclcpp.hpp"
 #include "tf2_msgs/msg/tf_message.hpp"
 
@@ -8,7 +16,8 @@ public:
   {
     // 订阅静态坐标变换消息
     subscription_ = this->create_subscription<tf2_msgs::msg::TFMessage>(
-        "/tf_static", 10, std::bind(&StaticTransformListener::tfCallback, this, std::placeholders::_1));
+        "/tf_static", 10, 
+        std::bind(&StaticTransformListener::tfCallback, this, std::placeholders::_1));
   }
 
 private:
