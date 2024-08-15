@@ -109,6 +109,25 @@ sudo apt install ros-humble-tf2-tools
 
 
 
+# 卸载
+
+
+如果您需要卸载ROS 2或在已从二进制文件安装后切换到基于源代码的安装，请运行以下命令：
+
+```bash
+sudo apt remove ~nros-humble-* && sudo apt autoremove
+```
+
+您还可以删除存储库:
+
+```bash
+sudo rm /etc/apt/sources.list.d/ros2.list
+sudo apt update
+sudo apt autoremove
+
+sudo apt upgrade
+```
+
 
 
 
