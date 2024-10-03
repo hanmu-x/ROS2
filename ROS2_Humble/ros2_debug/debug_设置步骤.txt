@@ -1,0 +1,25 @@
+
+1.  采用debug模式编译ros2 包
+
+	colcon build --symlink-install --cmake-args '-DCMAKE_BUILD_TYPE=Debug' -Wall -Wextra -Wpendantic
+	
+这条命令是一个复合命令，用于构建 ROS 2 包，并设置了特定的编译选项。让我们逐部分解析这条命令：
+
+### colcon build
+	`colcon` 是 ROS 2 推荐使用的构建工具，用于构建工作空间中的所有包。它是一个灵活的工具，可以与不同的构建系统（如 CMake）配合使用。
+
+### --symlink-install
+	`--symlink-install` 选项告诉 `colcon` 使用符号链接的方式安装构建产物。这意味着 `colcon` 不会复制文件到安装目录，而是创建指向构建目录中文件的符号链接。这样做可以节省磁盘空间，并且在开发过程中更快地看到更改的效果，因为不需要重新编译和安装整个项目。
+
+### --cmake-args
+	`--cmake-args` 允许你传递额外的 CMake 参数给 `colcon` 命令。这里的参数是 `-DCMAKE_BUILD_TYPE=Debug`，用于指定构建类型为 Debug。这会影响编译器的优化级别，并启用调试信息的生成。
+
+### -Wall
+	`-Wall` 是一个传递给编译器的标志，表示启用所有警告。这对于发现代码中的潜在问题是很有帮助的。
+
+### -Wextra
+	`-Wextra` 启用了一组额外的警告，包括那些可能指示逻辑错误的情况。这有助于提高代码质量。
+
+### -Wpedantic
+	`-Wpedantic` 启用对所有不符合语言标准的扩展的警告。这有助于确保代码严格遵循语言标准，避免使用特定于编译器的特性。
+
